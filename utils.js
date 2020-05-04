@@ -166,17 +166,22 @@ const utilities = {
   },
   formatRut:(rut)=>{
     // XX.XXX.XXX-X
+    // Z.ZZZ.ZZZ-Z
     const newRut = rut.replace(/\./g,'').replace(/\-/g, '').trim().toLowerCase();
     const lastDigit = newRut.substr(-1, 1);
     const rutDigit = newRut.substr(0, newRut.length-1)
     let format = '';
+    let dot = 1;
     for (let i = rutDigit.length; i > 0; i--) {
       const e = rutDigit.charAt(i-1);
       format = e.concat(format);
-      if (i % 3 === 0){
+      if (dot % 3 === 0){
         format = '.'.concat(format);
+        dot=1;
+        continue;
       }
+      dot++;
     }
-    return format.concat('-').concat(lastDigit);
+    return (format.charAt(0)==='.') ? format.substring(1,format.length).concat('-').concat(lastDigit).toUpperCase() : format.concat('-').concat(lastDigit).toUpperCase();
   }
 }
