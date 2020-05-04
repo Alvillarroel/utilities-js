@@ -183,5 +183,21 @@ const utilities = {
       dot++;
     }
     return (format.charAt(0)==='.') ? format.substring(1,format.length).concat('-').concat(lastDigit).toUpperCase() : format.concat('-').concat(lastDigit).toUpperCase();
-  }
+  },
+  getStringValue : (find, searchTerm) => {
+    let pos = find.indexOf(searchTerm);
+    let returnValue = '';
+    if (pos > -1){
+     pos += searchTerm.length +1;
+     for (let i = pos; i < find.length; i++) {
+      const e = find[i];
+      if (e !== '&'){
+       returnValue += e;
+      } else {
+       break;
+      }
+     }
+    }
+    return returnValue;
+   }
 }
